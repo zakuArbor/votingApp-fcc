@@ -9,7 +9,8 @@ module.exports = function (app, passport) {
 		if (req.isAuthenticated()) {
 			return next();
 		} else {
-			res.redirect('/login');
+			//res.redirect('/login');
+			res.render('index', {loggedIn: false});
 		}
 	}
 
@@ -17,18 +18,20 @@ module.exports = function (app, passport) {
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.html');
+			//res.sendFile(path + '/public/index.html');
+			res.render('index', {loggedIn: true});
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/login.html');
+			res.sendFile(path + '/');
+			//res.sendFile(path + '/public/index.html');
 		});
 
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();
-			res.redirect('/login');
+			res.redirect('/');
 		});
 
 	app.route('/profile')
@@ -48,6 +51,7 @@ module.exports = function (app, passport) {
 		.get(passport.authenticate('github', {
 			successRedirect: '/',
 			failureRedirect: '/login'
+			//failureRedirect: '/'
 		}));
 
 	app.route('/api/:id/clicks')
