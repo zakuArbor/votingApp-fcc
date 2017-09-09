@@ -41,6 +41,13 @@ p {
 
 /****** Header Styling ******/
 
+.bg {
+	background-color: #015785;
+	color: #fff;
+	padding: 10px;
+	margin-bottom: 20px;	
+}
+
 header p {
 	margin: 5px 0 5px 0;
 }
@@ -75,6 +82,38 @@ header a ~ p {
 	font-weight: 400;
 }
 
+/****** Poll Styling *****/
+.poll-label {
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: 2px;
+	color: #333;
+}
+
+.poll-input {
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin: 5px;
+}
+
+#submit {
+	display: block;
+	border-radius: 4px;
+	background-color: #5BC85B;
+	padding: 10px 40px 10px 40px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	border: 0px;
+	margin: auto;
+}
+
+#submit:hover {
+	opacity: 0.6;
+	color: #333;
+}
+
 /****** Login Styling ******/
 
 .login {
@@ -102,6 +141,12 @@ header a ~ p {
 img {
 	margin: 0 auto;
 	display: block;
+}
+
+.main-title {
+	font-weight: 500;
+        font-size: 60px;
+        color: #FFC666;
 }
 
 .clementine-text { /* Styling for the Clementine.js text */

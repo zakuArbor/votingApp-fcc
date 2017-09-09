@@ -11,9 +11,8 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<div class="page-header">
-			<p class="clementine-text">Zaku Poll (FCC)</p>
+		<div class = "container-fluid bg text-center">
+			<p class = "main-title">Zaku Poll (FCC)</p>
 			<header>
 			<% if (loggedIn) { %>
 				<p>Welcome, <span id="display-name"></span>!</p>
@@ -28,13 +27,14 @@
                                 <p>LOGIN WITH GITHUB</p>
                                         </div>
                                 </a>
-                        </div>
 			<% } %>
 			</header>
 			</div>
-	
+		</div>
+		<div class="container">
 		<!-- <div class="container">-->
-			<p style = 'font-size: 18px;'>Select a poll to see the results and vote, or <a href = 'create-poll'>make a new poll</a></p>
+			<p style = 'font-size: 18px;'>Select a poll to see the results and vote, or 
+				<a href = 'create-poll'>make a new poll</a></p>
 			<!--
 			<p>You have clicked the button <span id="click-nbr"></span> times.</p>
 			<br />

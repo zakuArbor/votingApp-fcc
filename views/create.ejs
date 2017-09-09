@@ -9,7 +9,23 @@
                 <link href="/views/css/main.css" rel="stylesheet" type="text/css">
         </head>
         <body>
-                <div class="container">
+                <div class="fluid-container bg text-center">
+			<p class="main-title">Create Poll</h1></p>
+		</div>
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h1 class = "text-center" style = "letter-spacing: 5px; padding-bottom: 10px;">New Poll</h1>
+					<form action = "/insert-poll">
+					<p class = "text-center poll-label">Name of your poll</p>
+					<input type = "text" name = "poll_name" placeholder = "Poll Name" class = "poll-input" required></br>
+					<p class = "text-center poll-label">Options</p>
+					<input type = "text" class = "poll-input">
+					<input type = "text" class = "poll-input">
+					<input type = "submit" value = "SUBMIT" id = "submit">
+					</form>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
