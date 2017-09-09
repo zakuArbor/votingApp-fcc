@@ -2,10 +2,12 @@
 
 var express = require('express');
 var routes = require('./app/routes/index.js');
+var process_forms = require('./app/models/process.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
 var path = require('path');
+//var process = require('./app/models/process.js');
 
 var app = express();
 require('dotenv').load();
@@ -31,6 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 routes(app, passport);
+process_forms(app);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {

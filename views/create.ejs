@@ -11,10 +11,8 @@
 			$(document).ready(function() {
 				var addButton = document.getElementById("more_option");
 				var option_panel = document.getElementById("options");
-				var i = 2;
                 		$(addButton).click(function() {
-					i+=1;
-	        	                $("input[type|='text']").last().after("<input type = 'text' name = 'opt" + i + "' class = 'poll-input'>");            
+	        	                $("input[type|='text']").last().after("<input type = 'text' name = 'opt[]' class = 'poll-input'>"); 
         	        	});
 	        	});
 		</script>
@@ -27,13 +25,13 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h1 class = "text-center" style = "letter-spacing: 5px; padding-bottom: 10px;">New Poll</h1>
-					<form action = "/insert-poll">
+					<form action = "/insert-poll" method = "POST">
 					<p class = "text-center poll-label">Name of your poll</p>
 					<input type = "text" name = "poll_name" placeholder = "Poll Name" class = "poll-input" required></br>
 					<p class = "text-center poll-label">Options</p>
 					<div id = "options">
-						<input type = "text" name = "opt1" class = "poll-input" required>
-						<input type = "text" name = "opt2" class = "poll-input" required>
+						<input type = "text" name = "opt[]" class = "poll-input" required>
+						<input type = "text" name = "opt[]" class = "poll-input" required>
 					</div>
 					<div id = "more_option" class = ".btn-add">More Options</div>
 					<input type = "submit" value = "SUBMIT" id = "submit">
