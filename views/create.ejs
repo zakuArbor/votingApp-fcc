@@ -7,6 +7,17 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
                 <link href="/views/css/main.css" rel="stylesheet" type="text/css">
+		<script>
+			$(document).ready(function() {
+				var addButton = document.getElementById("more_option");
+				var option_panel = document.getElementById("options");
+				var i = 2;
+                		$(addButton).click(function() {
+					i+=1;
+	        	                $("input[type|='text']").last().after("<input type = 'text' name = 'opt" + i + "' class = 'poll-input'>");            
+        	        	});
+	        	});
+		</script>
         </head>
         <body>
                 <div class="fluid-container bg text-center">
@@ -20,8 +31,11 @@
 					<p class = "text-center poll-label">Name of your poll</p>
 					<input type = "text" name = "poll_name" placeholder = "Poll Name" class = "poll-input" required></br>
 					<p class = "text-center poll-label">Options</p>
-					<input type = "text" class = "poll-input">
-					<input type = "text" class = "poll-input">
+					<div id = "options">
+						<input type = "text" name = "opt1" class = "poll-input" required>
+						<input type = "text" name = "opt2" class = "poll-input" required>
+					</div>
+					<div id = "more_option" class = ".btn-add">More Options</div>
 					<input type = "submit" value = "SUBMIT" id = "submit">
 					</form>
 				</div>

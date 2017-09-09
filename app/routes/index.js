@@ -53,7 +53,8 @@ module.exports = function (app, passport) {
 			}
 			else {
 				console.log('not logged');
-				res.render('login');
+				res.render('create');
+				//res.render('login');
 			}
 		});
 

@@ -97,11 +97,28 @@ header a ~ p {
 	margin: 5px;
 }
 
+#more_option {
+	display: block;
+	border-radius: 4px;
+	background-color: #F0F0F0;
+	padding: 10px 40px 10px 40px;
+	font-size: 18px;
+	border: 1px solid #D0D0D0;
+	width: 200px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+
 #submit {
 	display: block;
 	border-radius: 4px;
 	background-color: #5BC85B;
-	padding: 10px 40px 10px 40px;
+	padding: 10px 62px 10px 62px;
 	color: #fff;
 	font-size: 18px;
 	font-weight: bold;
@@ -109,10 +126,31 @@ header a ~ p {
 	margin: auto;
 }
 
-#submit:hover {
+#submit:hover, #more_option:hover {
 	opacity: 0.6;
 	color: #333;
 }
+
+
+/*Glowing Blue Input Highlights*/
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+ 
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+/*Credits: https://css-tricks.com/snippets/css/glowing-blue-input-highlights/ */
 
 /****** Login Styling ******/
 
