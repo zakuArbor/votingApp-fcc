@@ -14,6 +14,13 @@ module.exports = function (app, passport) {
 		}
 	}
 
+	function isLoggedInBoolean(req, res) {
+		if (req.isAuthenticated()) {
+			return true;
+		}
+		return false;
+	}
+
 	var clickHandler = new ClickHandler();
 
 	app.route('/')
@@ -37,6 +44,17 @@ module.exports = function (app, passport) {
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/profile.html');
+		});
+
+	app.route('/create-poll')
+		.get(function (req, res) {
+			if (isLoggedInBoolean(req, res)) {
+				res.render('create');
+			}
+			else {
+				console.log('not logged');
+				res.render('login');
+			}
 		});
 
 	app.route('/api/:id')
