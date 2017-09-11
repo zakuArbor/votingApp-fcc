@@ -57,6 +57,13 @@ module.exports = function (app, passport) {
 				//res.render('login');
 			}
 		});
+	
+	app.route('/insert-poll') 
+		.get(function (req, res) {
+			if (!isLoggedInBoolean(req, res)) {
+				res.render('login');
+			}	
+		});
 
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) {
