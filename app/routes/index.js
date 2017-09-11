@@ -9,31 +9,60 @@ module.exports = function (app, passport) {
 		if (req.isAuthenticated()) {
 			return next();
 		} else {
-			res.redirect('/login');
+			//res.redirect('/login');
+			res.render('index', {loggedIn: false});
 		}
+	}
+
+	function isLoggedInBoolean(req, res) {
+		if (req.isAuthenticated()) {
+			return true;
+		}
+		return false;
 	}
 
 	var clickHandler = new ClickHandler();
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.html');
+			//res.sendFile(path + '/public/index.html');
+			res.render('index', {loggedIn: true});
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/login.html');
+			res.sendFile(path + '/');
+			//res.sendFile(path + '/public/index.html');
 		});
 
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();
-			res.redirect('/login');
+			res.redirect('/');
 		});
 
 	app.route('/profile')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/profile.html');
+		});
+
+	app.route('/create-poll')
+		.get(function (req, res) {
+			if (isLoggedInBoolean(req, res)) {
+				res.render('create');
+			}
+			else {
+				console.log('not logged');
+				res.render('create');
+				//res.render('login');
+			}
+		});
+	
+	app.route('/insert-poll') 
+		.get(function (req, res) {
+			if (!isLoggedInBoolean(req, res)) {
+				res.render('login');
+			}	
 		});
 
 	app.route('/api/:id')
@@ -48,6 +77,7 @@ module.exports = function (app, passport) {
 		.get(passport.authenticate('github', {
 			successRedirect: '/',
 			failureRedirect: '/login'
+			//failureRedirect: '/'
 		}));
 
 	app.route('/api/:id/clicks')

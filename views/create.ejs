@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>Zaku Poll - Create your own poll</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
+                <link href="/views/css/main.css" rel="stylesheet" type="text/css">
+		<script>
+			$(document).ready(function() {
+				var addButton = document.getElementById("more_option");
+				var option_panel = document.getElementById("options");
+                		$(addButton).click(function() {
+	        	                $("input[type|='text']").last().after("<input type = 'text' name = 'opt[]' class = 'poll-input'>"); 
+        	        	});
+	        	});
+		</script>
+        </head>
+        <body>
+                <div class="fluid-container bg text-center">
+			<p class="main-title">Create Poll</h1></p>
+		</div>
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h1 class = "text-center" style = "letter-spacing: 5px; padding-bottom: 10px;">New Poll</h1>
+					<form action = "/insert-poll" method = "POST">
+					<p class = "text-center poll-label">Name of your poll</p>
+					<input type = "text" name = "poll_name" placeholder = "Poll Name" class = "poll-input" required></br>
+					<p class = "text-center poll-label">Options</p>
+					<div id = "options">
+						<input type = "text" name = "opt[]" class = "poll-input" required>
+						<input type = "text" name = "opt[]" class = "poll-input" required>
+					</div>
+					<div id = "more_option" class = ".btn-add">More Options</div>
+					<input type = "submit" value = "SUBMIT" id = "submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

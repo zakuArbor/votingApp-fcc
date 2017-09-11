@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Zaku Poll - Create your own poll</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<link href="/views/css/main.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div class = "container-fluid bg text-center">
+			<p class = "main-title">Zaku Poll (FCC)</p>
+			<header>
+			<% if (loggedIn) { %>
+				<p>Welcome, <span id="display-name"></span>!</p>
+	               		<a class="menu" href="/profile">Profile</a>
+		       	        <p>|</p>
+               			<a class="menu" href="/logout">Logout</a>
+			<% } else { %>
+				<div class="login">
+                                <a href="/auth/github">
+                                <div class="btn" id="login-btn">
+                                <img src="/views/img/github_32px.png" alt="github logo" />
+                                <p>LOGIN WITH GITHUB</p>
+                                        </div>
+                                </a>
+			<% } %>
+			</header>
+			</div>
+		</div>
+		<div class="container">
+		<!-- <div class="container">-->
+			<p style = 'font-size: 18px;'>Select a poll to see the results and vote, or 
+				<a href = 'create-poll'>make a new poll</a></p>
+			<!--
+			<p>You have clicked the button <span id="click-nbr"></span> times.</p>
+			<br />
+			<div class="btn-container">
+				<button type="submit" class="btn btn-add">CLICK ME!</button>
+				<button class="btn btn-delete">RESET</button>
+			</div>-->
+			<div class = "well"></div>
+		</div>
+		
+		<script type="text/javascript" src="common/ajax-functions.js"></script>
+		<script type="text/javascript" src="controllers/clickController.client.js"></script>
+		<script type="text/javascript" src="controllers/userController.client.js"></script>
+	</body>
+
+</html>
