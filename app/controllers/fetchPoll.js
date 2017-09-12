@@ -20,7 +20,7 @@
 			if (userObject[i].polls) {
 			for (j = 0; j < userObject[i].polls.length; j++) {
 				html = html + "<div class = 'poll'>" +
-				"<a class = 'poll' href = '/" + userObject[i].polls[j]._id + "'>" + userObject[i].polls[j].poll_name + "</a>" +
+				"<a class = 'poll' href = '/polls/" + userObject[i].polls[j]._id + "'>" + userObject[i].polls[j].poll_name + "</a>" +
 				"</div>";
 	      		}
 	  	}

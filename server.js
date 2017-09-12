@@ -32,7 +32,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app, passport);
+routes(app, passport, mongoose);
 process_forms(app);
 
 var port = process.env.PORT || 8080;

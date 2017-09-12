@@ -4,7 +4,7 @@ var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, mongoose) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -72,6 +72,15 @@ module.exports = function (app, passport) {
 			pollHandler.getPolls(req, res);
 		});
 
+	app.route('/polls/:id')
+		.get(function (req, res) {
+			var logged = false;
+			if (isLoggedInBoolean(req, res)) {
+				logged = true;
+			}
+			pollHandler.getPoll(req, res, mongoose, logged);
+		});
+	
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) { 
 		});
