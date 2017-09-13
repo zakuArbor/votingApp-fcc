@@ -83,6 +83,17 @@ header a ~ p {
 }
 
 /****** Poll Styling *****/
+#voting_panel {
+	position: relative;
+	background-color: grey;
+}
+
+#graph {
+	position: relative;
+	background-color: purple; 
+}
+
+/****** Create Poll Styling *****/
 .poll-label {
 	font-weight: bold;
 	font-size: 16px;

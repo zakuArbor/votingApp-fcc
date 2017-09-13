@@ -72,13 +72,26 @@ module.exports = function (app, passport, mongoose) {
 			pollHandler.getPolls(req, res);
 		});
 
-	app.route('/polls/:id')
+	app.route('/:id') 
+		.get(function(req, res) {
+			console.log(req.params.id);
+			res.render('poll', {loggedIn: true, poll: req.params.id});
+		});
+	/*
+	app.route('/poll/:id') 
+		.get(function (req, res) {
+			console.log("pika");
+			res.json(req.params.id);
+		});
+	*/
+	app.route('/poll/:id')
 		.get(function (req, res) {
 			var logged = false;
 			if (isLoggedInBoolean(req, res)) {
 				logged = true;
 			}
-			pollHandler.getPoll(req, res, mongoose, logged);
+			console.log(req.params);
+			pollHandler.getPoll(req, res, logged);
 		});
 	
 	app.route('/api/:id')
