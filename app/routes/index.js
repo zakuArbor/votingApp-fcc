@@ -55,8 +55,8 @@ module.exports = function (app, passport, url) {
 			}
 			else {
 				console.log('not logged');
-				res.render('create');
-				//res.render('login');
+				//res.render('create');
+				res.render('login');
 			}
 		});
 	
@@ -69,6 +69,8 @@ module.exports = function (app, passport, url) {
 
 	app.route('/vote-poll/:id')
 		.post(function (req, res) {
+			console.log("route: vote");
+			console.log(req.body);
 			var logged = false;
 			if (isLoggedInBoolean(req, res)) {
 				logged = true;

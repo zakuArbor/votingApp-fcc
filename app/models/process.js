@@ -19,10 +19,10 @@ module.exports = function (app) {
 				for (i = 0; i < req.body.opt.length; i++) {
 					poll_options[i] = {option: req.body.opt[i], vote: 0}
 				}
+				console.log(poll_options);
 				Users.update( 
 					{ 'github.id': req.user.github.id}, 
-					{ 
-						'vote': [], 
+					{  
 						$push :
 						{
 							'polls' : {
