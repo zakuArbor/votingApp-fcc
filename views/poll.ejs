@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="/views/css/main.css" rel="stylesheet" type="text/css">
 	</head>
 
@@ -44,21 +44,28 @@
 				<div id = "voting_panel" class = "col-sm-5">
 					<span id = "poll_name"></span>
 					<p style = "text-align: left">I'd like to vote for:</p>
-					<form action = "" method = "post">
+					<form action = "/vote-poll/<%= poll %>" method = "post">
+						<input type = "hidden" name = "poll_id" value = "<%= poll %>">
 						<div id = "options">
-	
+							
 						</div>
-						<input type = "submit">
+						<button class = "btn btn-vote" type = "submit">Submit</button>
 					</form>
 				</div>
 				<div id = "graph" class = "col-sm-7"></div>
-
 			</div>
 		</div>
 			
 		<script type="text/javascript" src="/common/ajax-functions.js"></script>
 		<script>var id = '<%= poll %>';</script>
 		<script type="text/javascript" src="/controllers/fetchPoll.js"></script>
+		<script>
+			var err_msg = '<%= err_msg %>';
+			console.log(err_msg);
+                        if (err_msg.length > 0) {
+                                alert(err_msg);
+                        }
+                </script>
 		<!--<script type="text/javascript" src="controllers/clickController.client.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>-->
 	</body>

@@ -4,7 +4,7 @@ var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 
-module.exports = function (app, passport, mongoose) {
+module.exports = function (app, passport, url) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -67,6 +67,15 @@ module.exports = function (app, passport, mongoose) {
 			}	
 		});
 
+	app.route('/vote-poll/:id')
+		.post(function (req, res) {
+			var logged = false;
+			if (isLoggedInBoolean(req, res)) {
+				logged = true;
+			}
+			pollHandler.addVote(req, res, logged, url);
+		});
+
 	app.route('/polls')
 		.get(function (req, res) {
 			pollHandler.getPolls(req, res);
@@ -74,8 +83,20 @@ module.exports = function (app, passport, mongoose) {
 
 	app.route('/:id') 
 		.get(function(req, res) {
-			console.log(req.params.id);
-			res.render('poll', {loggedIn: true, poll: req.params.id});
+			var err_msg = "";
+			console.log("111111111111111111");
+			for (var key in req.query) {
+				console.log(req.query[key]);
+				if (req.query[key] == 1) {
+					err_msg = "Please input a valid input";	
+				}
+				else if (req.query[key] == 2) {
+					err_msg = "You already voted. You can only vote once";
+				}
+			}
+			
+			console.log(err_msg);
+			res.render('poll', {loggedIn: true, poll: req.params.id, err_msg: err_msg});
 		});
 	/*
 	app.route('/poll/:id') 

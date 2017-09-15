@@ -88,6 +88,28 @@ header a ~ p {
 	background-color: grey;
 }
 
+select, button[type=submit] {
+	width: 80%;
+}
+
+button[type=submit] {
+	margin: 0px;
+	margin-top: 10px;
+	border: 0px;
+	border-radius: 5px;	
+	background-color: #1a75ff; 
+	padding: 7px;
+	color: white;
+}
+
+option {
+	width: 100%;
+}
+
+#poll_name {
+	font-size: 18px;
+}
+
 #graph {
 	position: relative;
 	background-color: purple; 

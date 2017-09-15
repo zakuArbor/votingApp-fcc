@@ -45,6 +45,65 @@ function PollHandler () {
 			);
 	};
 
+	//this.updateVote = function (req, res, 
+
+	this.addVote = function (req, res, logged, url) {
+		var path = "/" + req.body.poll_id;
+		//check if user already voted
+		console.log("**************");
+		console.log(req.body.option);
+		if (req.body.option = "") {
+			console.log("redir");
+			res.redirect(url.format({
+				pathname: path, 
+				query: {
+					error: 1
+				}
+			}));
+		}
+		else {
+			if (logged) {
+				console.log("pika pika pika");
+				console.log(req.user.github.id);
+				Users
+					.count(
+						{"github.id": req.user.github.id, "vote": req.body.poll_id}, function (err, count) {
+							if (err) throw err;
+							if (count > 0) {
+								res.redirect(path);
+							}
+							else {
+								alert("Else");
+							}
+						}
+					);
+					console.log("pika pika pika pikachu says hello");
+			}
+			console.log("print");
+			console.log(req.body);
+			Users
+				.update(
+					{"polls.poll_id": req.body.poll_id},
+					{$inc: { "polls.$.vote": 1}}
+				);
+		
+			console.log("test hello");
+			
+			res.redirect('/' + req.body.poll_id);
+		}
+			/*Users
+				.count(
+					{"polls.poll_id": req.body.poll_id},
+					{
+						$push:
+						{ "votes": req.body.poll_id }
+					}, 
+					{upsert: true}, function(err, docs) {
+						res.redirect('/' + req.body.poll_id);
+					}
+				);		*/
+	};
+
 	this.getClicks = function (req, res) {
 		Users
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })

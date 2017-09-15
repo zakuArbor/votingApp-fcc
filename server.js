@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
 var path = require('path');
+var bodyParser = require('body-parser');
+var url = require('url');
 //var process = require('./app/models/process.js');
 
 var app = express();
@@ -22,6 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/views', express.static(process.cwd() + '/views'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(session({
 	secret: 'secretClementine',
@@ -32,7 +35,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app, passport, mongoose);
+routes(app, passport, url);
 process_forms(app);
 
 var port = process.env.PORT || 8080;
