@@ -85,20 +85,7 @@ module.exports = function (app, passport, url) {
 
 	app.route('/:id') 
 		.get(function(req, res) {
-			var err_msg = "";
-			console.log("111111111111111111");
-			for (var key in req.query) {
-				console.log(req.query[key]);
-				if (req.query[key] == 1) {
-					err_msg = "Please input a valid input";	
-				}
-				else if (req.query[key] == 2) {
-					err_msg = "You already voted. You can only vote once";
-				}
-			}
-			
-			console.log(err_msg);
-			res.render('poll', {loggedIn: true, poll: req.params.id, err_msg: err_msg});
+			res.render('poll', {loggedIn: true, poll: req.params.id});
 		});
 	/*
 	app.route('/poll/:id') 

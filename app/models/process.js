@@ -17,7 +17,7 @@ module.exports = function (app) {
 			console.log(req.body.opt.length);
 			if (req.body.opt.length) {
 				for (i = 0; i < req.body.opt.length; i++) {
-					poll_options[i] = {option: req.body.opt[i], vote: 0}
+					poll_options[i] = {option: req.body.opt[i], votes: 0}
 				}
 				console.log(poll_options);
 				Users.update( 
