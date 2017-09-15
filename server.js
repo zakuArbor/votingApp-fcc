@@ -21,10 +21,10 @@ mongoose.Promise = global.Promise;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/views', express.static(process.cwd() + '/views'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
-app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(session({
 	secret: 'secretClementine',

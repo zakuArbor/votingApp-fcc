@@ -8,6 +8,16 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="/views/css/main.css" rel="stylesheet" type="text/css">
+		<script>
+		$(document).ready(function(){
+			$("#vote").mousedown(function() {
+				if ($("#option") && $("#options").val() == "") {
+					console.log($("#options"));
+					alert("Please choose a valid option");
+				}
+			});
+		});
+		</script>
 	</head>
 
 	<body>
@@ -46,10 +56,9 @@
 					<p style = "text-align: left">I'd like to vote for:</p>
 					<form action = "/vote-poll/<%= poll %>" method = "post">
 						<input type = "hidden" name = "poll_id" value = "<%= poll %>">
-						<div id = "options">
-							
-						</div>
-						<button class = "btn btn-vote" type = "submit">Submit</button>
+						<select id = 'options' name = 'option' value = ''>	
+						</select>
+						<button id = "vote" class = "btn btn-vote" type = "submit">Submit</button>
 					</form>
 				</div>
 				<div id = "graph" class = "col-sm-7"></div>
