@@ -54,11 +54,12 @@ function PollHandler () {
 		if (logged) {
 			console.log("pika pika pika");
 		}
-		Users
+		console.log(req.body.option);
+		Polls
 			.update(
-				{"polls._id": req.body.poll_id, "polls.options.option": req.body.option},
-				{$inc: { "polls.$.options.votes": 1}}, 
-				{upsert: true}, function (err, doc) {
+				{"_id": req.body.poll_id, "options.option": req.body.option},
+				{$inc: { "options.$.votes": 1}}, 
+				function (err, doc) {
 					if (err) throw err;
 					res.redirect(path);
 				}
