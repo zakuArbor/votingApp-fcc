@@ -51,32 +51,28 @@ function PollHandler () {
 
 	this.addVote = function (req, res, logged, url) {
 		var path = "/" + req.body.poll_id;
-		if (logged) {
-			console.log("pika pika pika");
-		}
-		console.log(req.body.option);
 		Polls
 			.update(
 				{"_id": req.body.poll_id, "options.option": req.body.option},
 				{$inc: { "options.$.votes": 1}}, 
 				function (err, doc) {
 					if (err) throw err;
-					res.redirect(path);
+					if (logged) {
+						Users.update(
+						{'github.id': req.user.github.id}, 
+						{
+							$push:
+							{
+								"voted": req.body.poll_id
+							}
+						}, function (err) {
+							if (err) throw err;
+						});
+					}
 				}
 			);
+		res.redirect(path);
 	
-	
-			/*Users
-				.count(
-					{"polls.poll_id": req.body.poll_id},
-					{
-						$push:
-						{ "votes": req.body.poll_id }
-					}, 
-					{upsert: true}, function(err, docs) {
-						res.redirect('/' + req.body.poll_id);
-					}
-				);		*/
 	};
 
 	this.getClicks = function (req, res) {
