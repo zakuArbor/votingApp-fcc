@@ -6,8 +6,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="/views/css/main.css" rel="stylesheet" type="text/css">
+		<script>
+		$(document).ready(function(){
+			$("#vote").mousedown(function() {
+				if ($("#option") && $("#options").val() == "") {
+					console.log($("#options"));
+					alert("Please choose a valid option");
+				}
+			});
+		});
+		</script>
 	</head>
 
 	<body>
@@ -33,8 +43,6 @@
 		</div>
 		<div class="container">
 		<!-- <div class="container">-->
-			<p style = 'font-size: 18px;'>Select a poll to see the results and vote, or 
-				<a href = 'create-poll'>make a new poll</a></p>
 			<!--
 			<p>You have clicked the button <span id="click-nbr"></span> times.</p>
 			<br />
@@ -42,13 +50,26 @@
 				<button type="submit" class="btn btn-add">CLICK ME!</button>
 				<button class="btn btn-delete">RESET</button>
 			</div>-->
-			<div id = "poll_panel" class = "well"></div>
+			<div id = "poll_panel" class = "jumbotron row">
+				<div id = "voting_panel" class = "col-sm-5">
+					<span id = "poll_name"></span>
+					<p style = "text-align: left">I'd like to vote for:</p>
+					<form action = "/vote-poll/<%= poll %>" method = "post">
+						<input type = "hidden" name = "poll_id" value = "<%= poll %>">
+						<select id = 'options' name = 'option' value = ''>	
+						</select>
+						<button id = "vote" class = "btn btn-vote" type = "submit">Submit</button>
+					</form>
+				</div>
+				<div id = "graph" class = "col-sm-7"></div>
+			</div>
 		</div>
-		
-		<script type="text/javascript" src="common/ajax-functions.js"></script>
-		<script type="text/javascript" src="controllers/fetchPolls.js"></script>
-		<script type="text/javascript" src="controllers/clickController.client.js"></script>
-		<script type="text/javascript" src="controllers/userController.client.js"></script>
+			
+		<script type="text/javascript" src="/common/ajax-functions.js"></script>
+		<script>var id = '<%= poll %>';</script>
+		<script type="text/javascript" src="/controllers/fetchPoll.js"></script>
+		<!--<script type="text/javascript" src="controllers/clickController.client.js"></script>
+		<script type="text/javascript" src="controllers/userController.client.js"></script>-->
 	</body>
 
 </html>

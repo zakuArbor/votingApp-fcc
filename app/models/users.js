@@ -12,15 +12,17 @@ var User = new Schema({
 	},
 	polls: [
 		{
-			poll_name: String,
-			options: [
+			//poll_name: String,
+			/*options: [
 				{
 					option: String,
 					votes: Number
 				}
-			]	
+			]*/
+			poll_id: String	
 		}
-		]
+		],
+	voted: []
 });
 
 module.exports = mongoose.model('User', User);

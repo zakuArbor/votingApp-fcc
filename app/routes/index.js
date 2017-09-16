@@ -4,7 +4,7 @@ var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, url) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -55,8 +55,8 @@ module.exports = function (app, passport) {
 			}
 			else {
 				console.log('not logged');
-				res.render('create');
-				//res.render('login');
+				//res.render('create');
+				res.render('login');
 			}
 		});
 	
@@ -67,11 +67,43 @@ module.exports = function (app, passport) {
 			}	
 		});
 
+	app.route('/vote-poll/:id')
+		.post(function (req, res) {
+			console.log("route: vote");
+			console.log(req.body);
+			var logged = false;
+			if (isLoggedInBoolean(req, res)) {
+				logged = true;
+			}
+			pollHandler.addVote(req, res, logged, url);
+		});
+
 	app.route('/polls')
 		.get(function (req, res) {
 			pollHandler.getPolls(req, res);
 		});
 
+	app.route('/:id') 
+		.get(function(req, res) {
+			res.render('poll', {loggedIn: true, poll: req.params.id});
+		});
+	/*
+	app.route('/poll/:id') 
+		.get(function (req, res) {
+			console.log("pika");
+			res.json(req.params.id);
+		});
+	*/
+	app.route('/poll/:id')
+		.get(function (req, res) {
+			var logged = false;
+			if (isLoggedInBoolean(req, res)) {
+				logged = true;
+			}
+			console.log(req.params);
+			pollHandler.getPoll(req, res, logged);
+		});
+	
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) { 
 		});
