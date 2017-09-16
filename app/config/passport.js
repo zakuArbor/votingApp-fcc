@@ -37,7 +37,8 @@ module.exports = function (passport) {
 					newUser.github.displayName = profile.displayName;
 					newUser.github.publicRepos = profile._json.public_repos;
 					newUser.polls = [];
-
+					newUser.voted = [];
+				
 					newUser.save(function (err) {
 						if (err) {
 							throw err;

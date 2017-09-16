@@ -1,6 +1,7 @@
 'use strict';
 
 var Users = require('../models/users.js');
+var Poll = require('../models/polls.js');
 var bodyParser = require('body-parser');
 
 module.exports = function (app) {
@@ -20,6 +21,34 @@ module.exports = function (app) {
 					poll_options[i] = {option: req.body.opt[i], votes: 0}
 				}
 				console.log(poll_options);
+				
+				var newPoll = new Poll();
+				newPoll.poll_name = poll_name;
+				newPoll.options = poll_options;
+				newPoll.save(function (err, poll) {
+					if (err) throw err;
+					console.log("new poll");
+					console.log(poll);
+					console.log("end poll");
+					Users.update(
+						{'github.id': req.user.github.id},
+						{
+							$push:
+							{
+								'polls': {
+									poll_id: poll._id
+								}
+							}
+						}, 
+						function (err) {
+							if (err) throw err;
+							console.log("added");
+						}
+					);
+				});
+					//return done(null, newPoll);
+				//});
+/*
 				Users.update( 
 					{ 'github.id': req.user.github.id}, 
 					{  
@@ -30,10 +59,9 @@ module.exports = function (app) {
 								options: poll_options
 							}
 						}
-					}, 
-					{upsert: true}, function(err, docs) {
-					res.redirect('/');
-				});
+					}
+				});*/
+				res.redirect('/');
 			}
 		}
 	});

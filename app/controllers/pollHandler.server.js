@@ -1,13 +1,16 @@
 'use strict';
 
 var Users = require('../models/users.js');
+var Polls = require('../models/polls.js');
 var ObjectId = require('mongodb').ObjectID;
 
 function PollHandler () {
 
 	this.getPolls = function (req, res) {
-		Users
-			.find({}, {'_id': 0, 'polls._id': 1, 'polls.poll_name': 1}, function (err, results) {
+		console.log("fetch all polls");
+		//Users
+		Polls
+			.find({}, function (err, results) {
 				if (err) {throw err; }
 				if (results) {
 					res.json(results);
@@ -17,19 +20,18 @@ function PollHandler () {
 
 	this.getPoll = function (req, res, logged) {
 		console.log(req.params.id);
-		Users
+		Polls
 			.findOne(
-				{"polls._id": req.params.id }, 
-				{ polls: { $elemMatch: { "_id": req.params.id } } },
+				{"_id": req.params.id }, 
 				function(err, result) {
 					if (err) { throw err; }
 					if (result) {console.log(result);
 						var json = {
-		                            		"poll_name": result.polls[0].poll_name,
-                            				"options": result.polls[0].options,
+		                            		"poll_name": result.poll_name,
+                            				"options": result.options,
 							"ownership": false
                         			}
-
+						console.log(json.options);
 						if (logged) {
 							Users.count({ 'github.id': req.user.github.id }, function (err, count) {
 								json.ownership = true;
@@ -54,11 +56,14 @@ function PollHandler () {
 		}
 		Users
 			.update(
-				{"polls.poll_id": req.body.poll_id},
-				{$inc: { "polls.$.vote": 1}}
+				{"polls._id": req.body.poll_id, "polls.options.option": req.body.option},
+				{$inc: { "polls.$.options.votes": 1}}, 
+				{upsert: true}, function (err, doc) {
+					if (err) throw err;
+					res.redirect(path);
+				}
 			);
 	
-		res.redirect(path);	
 	
 			/*Users
 				.count(

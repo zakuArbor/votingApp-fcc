@@ -15,16 +15,16 @@
 		var html = "";
 		var i, j;
 
-		// O(m+n) = O(n^2) - Can we improve this?
+		console.log("Pika");
+		console.log(userObject);
 		for (i = 0; i < userObject.length; i++) {
-			if (userObject[i].polls) {
-			for (j = 0; j < userObject[i].polls.length; j++) {
+			if (userObject[i]) {
 				html = html + "<div class = 'poll'>" +
-				"<a class = 'poll' href = '" + userObject[i].polls[j]._id + "'>" + userObject[i].polls[j].poll_name + "</a>" +
+				"<a class = 'poll' href = '" + userObject[i]._id + "'>" + userObject[i].poll_name + "</a>" +
 				"</div>";
-	      		}
-	  	}
+	  		}
 		}
+		console.log(html);
           updateHtmlElement(poll_panel, html);
       }
       
