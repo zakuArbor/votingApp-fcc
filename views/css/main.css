@@ -85,7 +85,7 @@ header a ~ p {
 /****** Poll Styling *****/
 #voting_panel {
 	position: relative;
-	background-color: grey;
+//	background-color: grey;
 }
 
 select, button[type=submit] {
@@ -112,7 +112,6 @@ option {
 
 #graph {
 	position: relative;
-	background-color: purple; 
 }
 
 /****** Create Poll Styling *****/
