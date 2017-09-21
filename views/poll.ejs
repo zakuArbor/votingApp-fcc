@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 		<link href="/views/css/main.css" rel="stylesheet" type="text/css">
 		<script>
 		$(document).ready(function(){
@@ -54,17 +55,38 @@
 				<div id = "voting_panel" class = "col-sm-5">
 					<span id = "poll_name"></span>
 					<p style = "text-align: left">I'd like to vote for:</p>
-					<form action = "/vote-poll/<%= poll %>" method = "post">
+					<div id = "msg"></div>
+					<form id = "vote_form" action = "/vote-poll/<%= poll %>" method = "post">
 						<input type = "hidden" name = "poll_id" value = "<%= poll %>">
 						<select id = 'options' name = 'option' value = ''>	
 						</select>
 						<button id = "vote" class = "btn btn-vote" type = "submit">Submit</button>
+						<br><div id = "msg"></div>
 					</form>
 				</div>
-				<div id = "graph" class = "col-sm-7"></div>
+				<div id = "graph" class = "col-sm-7">
+					<canvas id="myChart" width="400" height="400"></canvas>
+					<script>
+						var ctx = document.getElementById("myChart").getContext('2d');
+					var myPieChart = new Chart(ctx,{
+					type: 'pie',
+					data: {
+					        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+					        datasets: [{
+							label: '# of Votes',
+							"data":[300,50,100],
+					            	backgroundColor: ["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],
+        					}]
+					},
+					options: {
+						cutoutPercentage: 40
+					}
+					});
+					</script>
+				
+				</div>
 			</div>
 		</div>
-			
 		<script type="text/javascript" src="/common/ajax-functions.js"></script>
 		<script>var id = '<%= poll %>';</script>
 		<script type="text/javascript" src="/controllers/fetchPoll.js"></script>
