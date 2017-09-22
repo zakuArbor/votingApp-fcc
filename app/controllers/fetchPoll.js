@@ -23,9 +23,24 @@
 		for (i = 0; i < userObject.options.length; i++) {
 			html += "<option value='" + userObject.options[i].option +"'>" + userObject.options[i].option + "</option>";
 		}
-		
+		console.log("------------------------------------");
+		console.log(userObject);	
 		updateHtmlElement(options_panel, html);
 	}
-      
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var myPieChart = new Chart(ctx,{
+		type: 'pie',
+		data: {
+			labels: userObject.options.map(function(option) { return option.option }),
+			datasets: [{
+					label: '# of Votes',
+					"data": userObject.options.map(function(option) { return option.votes }),
+					backgroundColor: ["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],
+				}]
+		},
+		options: {
+			cutoutPercentage: 40
+		}
+	});
    }));
 })();
