@@ -27,6 +27,18 @@
 		console.log(userObject);	
 		updateHtmlElement(options_panel, html);
 	}
+	var generateRandomColor = function() {
+        	var r = Math.floor(Math.random() * 255);
+        	var g = Math.floor(Math.random() * 255);
+        	var b = Math.floor(Math.random() * 255);
+        	return "rgb(" + r + "," + g + "," + b + ")";
+	};
+	var test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+	var backgroundColor = ["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(77,77,77)", 
+			"rgb(93,165,218)", "rgb(250,164,58)", "rgb(96,189,104)", "rgb(241,124,176)", "rgb(178,118,178)", 
+			"rgb(222,207,63)", "rgb(241,88,84)"];
+	for (var i = backgroundColor.length; i < userObject.options.length; i++) backgroundColor.push(generateRandomColor());
+	console.log(backgroundColor);
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myPieChart = new Chart(ctx,{
 		type: 'pie',
@@ -35,7 +47,8 @@
 			datasets: [{
 					label: '# of Votes',
 					"data": userObject.options.map(function(option) { return option.votes }),
-					backgroundColor: ["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],
+					backgroundColor: backgroundColor 
+//["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],
 				}]
 		},
 		options: {

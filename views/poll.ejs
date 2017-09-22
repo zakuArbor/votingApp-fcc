@@ -66,24 +66,6 @@
 				</div>
 				<div id = "graph" class = "col-sm-7">
 					<canvas id="myChart" width="400" height="400"></canvas>
-					<script>
-						var ctx = document.getElementById("myChart").getContext('2d');
-					var myPieChart = new Chart(ctx,{
-					type: 'pie',
-					data: {
-					        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-					        datasets: [{
-							label: '# of Votes',
-							"data":[300,50,100],
-					            	backgroundColor: ["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],
-        					}]
-					},
-					options: {
-						cutoutPercentage: 40
-					}
-					});
-					</script>
-				
 				</div>
 			</div>
 		</div>
