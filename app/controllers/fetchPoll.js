@@ -48,11 +48,11 @@
 					label: '# of Votes',
 					"data": userObject.options.map(function(option) { return option.votes }),
 					backgroundColor: backgroundColor 
-//["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],
 				}]
 		},
 		options: {
-			cutoutPercentage: 40
+			cutoutPercentage: 40,
+			legend: {position: 'bottom'}
 		}
 	});
    }));
