@@ -8,6 +8,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="/views/css/main.css" rel="stylesheet" type="text/css">
 		<script>
 		$(document).ready(function(){
@@ -16,6 +17,21 @@
 					console.log($("#options"));
 					alert("Please choose a valid option");
 				}
+			});
+			$('.popup').click(function(event) {
+				var width  = 575,
+				height = 400,
+				left   = ($(window).width()  - width)  / 2,
+				top    = ($(window).height() - height) / 2,
+				url    = this.href,
+				opts   = 'status=1' +
+					',width='  + width  +
+					',height=' + height +
+					',top='    + top    +
+					',left='   + left;
+    
+					window.open(url, 'twitter', opts);
+ 					return false;
 			});
 		});
 		</script>
@@ -63,9 +79,15 @@
 						<button id = "vote" class = "btn btn-vote" type = "submit">Submit</button>
 						<br><div id = "msg"></div>
 					</form>
+					<div id = "share"></div>
 				</div>
-				<div id = "graph" class = "col-sm-7">
-					<canvas id="myChart" height="200"></canvas>
+				<div id = "graph panel" class = "col-sm-7">
+					<div id = "graph">
+						<canvas id="myChart" height="200"></canvas>
+					</div>
+					<div class="btn-container">
+						<button type = "submit" class = "btn btn-danger">Delete this Poll</button>
+					</div>
 				</div>
 			</div>
 		</div>

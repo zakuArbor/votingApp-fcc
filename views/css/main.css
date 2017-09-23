@@ -92,7 +92,7 @@ select, button[type=submit] {
 	width: 80%;
 }
 
-button[type=submit] {
+#voting_panel button[type=submit] {
 	margin: 0px;
 	margin-top: 10px;
 	border: 0px;
@@ -112,6 +112,11 @@ option {
 
 #graph {
 	position: relative;
+}
+
+.twitter {
+	display: block;
+	
 }
 
 /****** Create Poll Styling *****/
@@ -162,7 +167,6 @@ option {
 	opacity: 0.6;
 	color: #333;
 }
-
 
 /*Glowing Blue Input Highlights*/
 input[type=text], textarea {
@@ -233,22 +237,33 @@ img {
 }
 
 /****** Click Styling ******/
+#login-btn {
+	background-color: #00BCD4;
+}
+
+.twitter {
+	margin-top: 10px;
+	background-color: #4099FF;
+	width: 80%;
+	padding: 7px;
+}
 
 .btn-container {	/* Styling for the div that contains the buttons */
-	margin: -10px auto 0 auto;
+	position: relative;
+	//float: right;	
+	//margin: -10px auto 0 auto;
 	text-align: center;
 }
 
 .btn {	/* Styling for buttons */
-	margin: 0 8px;
 	color: white;
-	background-color: #00BCD4;
+	//background-color: #00BCD4;
 	display: inline-block;
 	border: 0;
 	font-size: 14px;
 	border-radius: 3px;
 	padding: 10px 5px;
-	width: 100px;
+//	width: 100px;
 	font-weight: 500;
 }
 
@@ -263,7 +278,7 @@ img {
 }
 
 .btn-delete {	/* Styling for delete button */
-	background-color: #ECEFF1;
+	background-color: #B22222;
 	color: #212121;
 }
 

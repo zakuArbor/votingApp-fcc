@@ -4,6 +4,7 @@
 
 	var poll_name_panel = document.querySelector('#poll_name') || null;	
 	var options_panel = document.querySelector('#options') || null;
+	var share_panel = document.querySelector('#share') || null;
 	var apiUrl = appUrl + '/poll/' + id;
 	console.log(apiUrl);
 	function updateHtmlElement (element, html) {
@@ -55,5 +56,30 @@
 			legend: {position: 'bottom'}
 		}
 	});
+
+	if (share_panel !== null) {
+		var html = "<a class='twitter btn popup' href='https://twitter.com/share?";
+                html += "related=twitterapi%2Ctwitter&text=" + userObject.poll_name + " - ZAKU Poll" + "'>";
+                html += "<i class='fa fa-twitter' aria-hidden='true'> </i> Share on Twitter</a>";
+		updateHtmlElement(share_panel, html);
+	}
+
+	//Credit to Irene Morente for Javascript twitter popup code
+	$('.popup').click(function(event) {
+		var width  = 575,
+		height = 400,
+		left   = ($(window).width()  - width)  / 2,
+		top    = ($(window).height() - height) / 2,
+		url    = this.href,
+		opts   = 'status=1' +
+			',width='  + width  +
+			',height=' + height +
+			',top='    + top    +
+			',left='   + left;
+    
+			window.open(url, 'twitter', opts);
+			return false;
+	});
+
    }));
 })();
