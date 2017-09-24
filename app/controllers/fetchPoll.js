@@ -91,8 +91,8 @@
                                         var api = appUrl + "/poll/" + id + "/delete";
                                         console.log("pika true delete");
                                         console.log(api);
-                                        $.ajax({url: appUrl + "/poll/<%= poll %>/delete", success: function(result){
-                                                        
+                                        $.ajax({url: api, success: function(result){
+                                        	window.location.href = appUrl; 
                                         }});
                                 }
                         });
