@@ -85,7 +85,11 @@ module.exports = function (app, passport, url) {
 
 	app.route('/:id') 
 		.get(function(req, res) {
-			res.render('poll', {loggedIn: true, poll: req.params.id});
+			var logged = false;
+			if (isLoggedInBoolean(req, res)) {
+                                logged = true;
+                        }
+			res.render('poll', {loggedIn: logged, poll: req.params.id});
 		});
 	/*
 	app.route('/poll/:id') 
