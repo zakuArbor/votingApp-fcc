@@ -124,9 +124,12 @@ module.exports = function (app, passport, url) {
 
 	app.route('/poll/:id/delete')
 		.get(function (req, res) {
-			//if (isLoggedInBoolean(req, res)) {
+			if (isLoggedInBoolean(req, res)) {
 				pollHandler.deletePoll(req, res);
-			//}
+			}
+			else {
+				res.redirect("/");
+			}
 		});
 
 
