@@ -25,6 +25,7 @@
 		for (i = 0; i < userObject.options.length; i++) {
 			html += "<option value='" + userObject.options[i].option +"'>" + userObject.options[i].option + "</option>";
 		}
+		html += "<option id = 'new_option' value = 'new'>Add custom option</option>";
 		console.log("------------------------------------");
 		console.log(userObject);	
 		updateHtmlElement(options_panel, html);
@@ -85,6 +86,20 @@
 			window.open(url, 'twitter', opts);
 			return false;
 	});
+	console.log(options_panel.options[options_panel.selectedIndex].value);
+	if (options_panel.options[options_panel.selectedIndex].value == "new") {
+		alert("pika");
+	}
+	
+	$('#options').change(function() {
+		if ($(this).find("option:selected").attr("id") == "new_option") {
+			var custom_option_panel = document.getElementById("custom_option_panel");
+			if (custom_option_panel !== null) {
+				var html = "<input type = 'text' id = 'custom_option' name = 'custom_option' placeholder='Custom Option'>";
+				updateHtmlElement(custom_option_panel, html);
+			}
+		}
+	});	
 
 	$('#btn-delete').click(function(event) {
 		if (confirm("Are you sure you want to delete this poll?") == true) {
