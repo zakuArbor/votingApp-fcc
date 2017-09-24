@@ -18,21 +18,6 @@
 					alert("Please choose a valid option");
 				}
 			});
-			$('.popup').click(function(event) {
-				var width  = 575,
-				height = 400,
-				left   = ($(window).width()  - width)  / 2,
-				top    = ($(window).height() - height) / 2,
-				url    = this.href,
-				opts   = 'status=1' +
-					',width='  + width  +
-					',height=' + height +
-					',top='    + top    +
-					',left='   + left;
-    
-					window.open(url, 'twitter', opts);
- 					return false;
-			});
 		});
 		</script>
 	</head>
@@ -85,8 +70,7 @@
 					<div id = "graph">
 						<canvas id="myChart" height="200"></canvas>
 					</div>
-					<div class="btn-container">
-						<button type = "submit" class = "btn btn-danger">Delete this Poll</button>
+					<div id = "delete_panel" class=" btn-container">
 					</div>
 				</div>
 			</div>
@@ -94,7 +78,7 @@
 		<script type="text/javascript" src="/common/ajax-functions.js"></script>
 		<script>var id = '<%= poll %>';</script>
 		<script type="text/javascript" src="/controllers/fetchPoll.js"></script>
-		<!--<script type="text/javascript" src="controllers/clickController.client.js"></script>
+<!--		<script type="text/javascript" src="controllers/clickController.client.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>-->
 	</body>
 

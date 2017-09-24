@@ -118,8 +118,16 @@ module.exports = function (app, passport, url) {
 			//failureRedirect: '/'
 		}));
 
+	app.route('/poll/:id/delete')
+		.get(function (req, res) {
+			//if (isLoggedInBoolean(req, res)) {
+				pollHandler.deletePoll(req, res);
+			//}
+		});
+
+
 	app.route('/api/:id/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
+		.delete(isLoggedIn, clickHandler.deletePoll);
 };

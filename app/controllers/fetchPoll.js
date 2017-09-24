@@ -5,6 +5,7 @@
 	var poll_name_panel = document.querySelector('#poll_name') || null;	
 	var options_panel = document.querySelector('#options') || null;
 	var share_panel = document.querySelector('#share') || null;
+	var delete_panel = document.querySelector('#delete_panel') || null;
 	var apiUrl = appUrl + '/poll/' + id;
 	console.log(apiUrl);
 	function updateHtmlElement (element, html) {
@@ -64,6 +65,10 @@
 		updateHtmlElement(share_panel, html);
 	}
 
+	if (delete_panel !== null && userObject.ownership == true) {
+		var html = "<button type = 'submit' id = 'btn-delete' class = 'btn btn-danger'>Delete this Poll</button>";
+		updateHtmlElement(delete_panel, html);
+	}
 	//Credit to Irene Morente for Javascript twitter popup code
 	$('.popup').click(function(event) {
 		var width  = 575,
@@ -81,5 +86,15 @@
 			return false;
 	});
 
+	$('#btn-delete').click(function(event) {
+		if (confirm("Hello World") == true) {
+                                        var api = appUrl + "/poll/" + id + "/delete";
+                                        console.log("pika true delete");
+                                        console.log(api);
+                                        $.ajax({url: appUrl + "/poll/<%= poll %>/delete", success: function(result){
+                                                        
+                                        }});
+                                }
+                        });
    }));
 })();

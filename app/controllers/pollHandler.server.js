@@ -74,6 +74,62 @@ function PollHandler () {
 		res.redirect(path);
 	
 	};
+	
+	this.deletePoll = function (req, res) {
+		console.log("**start delete poll");
+		console.log(req.user.github.id);
+		console.log(req.params.id);
+		Users
+			.findOne( { 'github.id': req.user.github.id /*req.params.id*/ },
+				function(err, result) {
+					if (err) throw err; 
+					if (result) {
+						var userId = result._id;
+						var poll_ownership = false;
+						var polls = [];
+						var voted = [];
+						for (var i = 0; i < result.polls.length; i++) {
+							if (result.polls[i].poll_id == req.params.id) {
+								poll_ownership = true;
+							} else {
+								polls.push(result.polls[i]);
+							}
+						}
+						for (var i = 0; i < result.voted.length; i++) {
+							if (result.voted[i] !== req.params.id) {
+								voted.push(result.voted[i]);
+							}
+						}
+						
+						if (poll_ownership) {
+							console.log("true");
+								
+								Polls.findOneAndRemove({ "_id": req.params.id}, function (err, poll_result) {
+									if (err) throw err;
+									if (poll_result) {
+									console.log("pika delete poll stage 2");
+									console.log(polls);
+									console.log(voted);
+									Users.findById( 
+				                                                {_id: userId},
+										function(err, doc) {
+											doc.polls = polls;
+											doc.markModified("polls");
+											doc.save();
+											doc.voted = voted;
+											doc.markModified("voted");
+											doc.save(function(err) {
+      											  return res.json({event:"Updated Contact"})
+    											});
+										}
+									);
+									}
+								});
+						}
+					}
+				}
+			);			
+	};
 
 	this.getClicks = function (req, res) {
 		Users

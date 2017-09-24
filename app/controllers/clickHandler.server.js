@@ -36,6 +36,11 @@ function ClickHandler () {
 			);
 	};
 
+	this.deletePoll = function (req, res) {
+		console.log("Pika delete poll");
+		/*Users
+			.findOne({ 'github.id': req.user.github.id)*/
+	};
 }
 
 module.exports = ClickHandler;
