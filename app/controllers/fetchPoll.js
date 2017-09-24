@@ -87,7 +87,7 @@
 	});
 
 	$('#btn-delete').click(function(event) {
-		if (confirm("Hello World") == true) {
+		if (confirm("Are you sure you want to delete this poll?") == true) {
                                         var api = appUrl + "/poll/" + id + "/delete";
                                         console.log("pika true delete");
                                         console.log(api);
