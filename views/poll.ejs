@@ -18,6 +18,7 @@
 					alert("Please choose a valid option");
 				}
 			});
+			$("#custom_option").hide();
 		});
 		</script>
 	</head>
@@ -61,6 +62,9 @@
 						<input type = "hidden" name = "poll_id" value = "<%= poll %>">
 						<select id = 'options' name = 'option' value = ''>	
 						</select>
+						<div id = "custom_option_panel">
+						<input type = 'text' id = 'custom_option' name = 'custom_option' placeholder='Custom Option'>
+						</div>
 						<button id = "vote" class = "btn btn-vote" type = "submit">Submit</button>
 						<br><div id = "msg"></div>
 					</form>

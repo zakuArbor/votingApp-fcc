@@ -51,10 +51,19 @@ function PollHandler () {
 
 	this.addVote = function (req, res, logged, url) {
 		var path = "/" + req.body.poll_id;
+		var query, update;
+		if (req.body.option == "new" && req.body.custom_option !== "") {
+			query = {"_id": req.body.poll_id};
+			update = {$push: {"options": {option: req.body.custom_option, votes: 1}}};
+		}
+		else {
+			query = {"_id": req.body.poll_id, "options.option": req.body.option};
+			update = {$inc: { "options.$.votes": 1}};
+		}
 		Polls
 			.update(
-				{"_id": req.body.poll_id, "options.option": req.body.option},
-				{$inc: { "options.$.votes": 1}}, 
+				query,
+				update, 
 				function (err, doc) {
 					if (err) throw err;
 					if (logged) {

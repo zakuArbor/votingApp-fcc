@@ -90,14 +90,15 @@
 	if (options_panel.options[options_panel.selectedIndex].value == "new") {
 		alert("pika");
 	}
-	
+	var custom_option = document.getElementById("custom_option");
 	$('#options').change(function() {
 		if ($(this).find("option:selected").attr("id") == "new_option") {
-			var custom_option_panel = document.getElementById("custom_option_panel");
-			if (custom_option_panel !== null) {
-				var html = "<input type = 'text' id = 'custom_option' name = 'custom_option' placeholder='Custom Option'>";
-				updateHtmlElement(custom_option_panel, html);
+			if (custom_option !== null) {
+				$(custom_option).show();	
 			}
+		}
+		else {
+			$(custom_option).hide();
 		}
 	});	
 
