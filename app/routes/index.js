@@ -3,6 +3,7 @@
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
+var UserHandler = require(path + '/app/controllers/userHandler.server.js');
 
 module.exports = function (app, passport, url) {
 
@@ -24,6 +25,7 @@ module.exports = function (app, passport, url) {
 
 	var clickHandler = new ClickHandler();
 	var pollHandler = new PollHandler();
+	var userHandler = new UserHandler();
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
@@ -57,6 +59,36 @@ module.exports = function (app, passport, url) {
 				console.log('not logged');
 				//res.render('create');
 				res.render('login');
+			}
+		});
+
+	app.route('/user') 
+		.get(function (req, res) {
+			if (isLoggedInBoolean(req, res)) {
+				userHandler.getUser(req, res, true);	
+			}
+			else {
+				res.json();
+			}
+		});
+
+	app.route('/my-polls')
+		.get(function (req, res) {
+			if (isLoggedInBoolean(req, res)) {
+				res.render('my-polls', {loggedIn: true});
+			}
+			else {
+				res.redirect('/');
+			}
+		});
+
+	app.route('/user/polls')
+		.get(function (req, res) {
+			if (isLoggedInBoolean(req, res)) {
+				userHandler.getUserPolls(req, res, true);
+			}
+			else {
+				res.json();
 			}
 		});
 	

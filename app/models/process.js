@@ -23,6 +23,7 @@ module.exports = function (app) {
 				console.log(poll_options);
 				
 				var newPoll = new Poll();
+				newPoll.owner = req.user.github.id;
 				newPoll.poll_name = poll_name;
 				newPoll.options = poll_options;
 				newPoll.save(function (err, poll) {
