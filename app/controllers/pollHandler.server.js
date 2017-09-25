@@ -29,10 +29,19 @@ function PollHandler () {
 						var json = {
 		                            		"poll_name": result.poll_name,
                             				"options": result.options,
-							"ownership": false
+							"ownership": false,
+							"voted": false
                         			}
 						console.log(json.options);
 						if (logged) {
+							var voted = false;
+							if (Users.count({ 'github.id': req.user.github.id, voted: req.params.id}, 
+							function (err, count) {
+								return true;
+							})) {
+								json.voted = true;
+							}
+
 							Users.count({ 'github.id': req.user.github.id }, function (err, count) {
 								json.ownership = true;
 								console.log("test");

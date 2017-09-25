@@ -6,6 +6,7 @@
 	var options_panel = document.querySelector('#options') || null;
 	var share_panel = document.querySelector('#share') || null;
 	var delete_panel = document.querySelector('#delete_panel') || null;
+	var submit_button = document.querySelector('#vote') || null;
 	var apiUrl = appUrl + '/poll/' + id;
 	console.log(apiUrl);
 	function updateHtmlElement (element, html) {
@@ -72,6 +73,12 @@
 		var html = "<button type = 'submit' id = 'btn-delete' class = 'btn btn-danger'>Delete this Poll</button>";
 		updateHtmlElement(delete_panel, html);
 	}
+
+	if (submit_button !== null && userObject.voted == true) {
+		submit_button.type = "";
+		updateHtmlElement(document.getElementById("msg"), "<p class = 'bg-danger'>You have already voted</p>");
+	}
+
 	//Credit to Irene Morente for Javascript twitter popup code
 	$('.popup').click(function(event) {
 		var width  = 575,
@@ -103,7 +110,7 @@
 			$(custom_option).hide();
 		}
 	});	
-
+	
 	$('#btn-delete').click(function(event) {
 		if (confirm("Are you sure you want to delete this poll?") == true) {
                                         var api = appUrl + "/poll/" + id + "/delete";
