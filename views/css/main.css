@@ -56,11 +56,11 @@ header p {
 	text-decoration: none;
 	padding: 6px;
 	margin: 0;
-	color: #727272;
+	color: white;
 }
 
 .menu:visited {
-	color: #727272;
+	color: white;
 }
 
 .menu:hover {
