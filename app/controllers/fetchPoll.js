@@ -95,10 +95,6 @@
 			window.open(url, 'twitter', opts);
 			return false;
 	});
-	console.log(options_panel.options[options_panel.selectedIndex].value);
-	if (options_panel.options[options_panel.selectedIndex].value == "new") {
-		alert("pika");
-	}
 	var custom_option = document.getElementById("custom_option");
 	$('#options').change(function() {
 		if ($(this).find("option:selected").attr("id") == "new_option") {

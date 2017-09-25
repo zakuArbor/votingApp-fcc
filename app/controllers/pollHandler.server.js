@@ -35,17 +35,19 @@ function PollHandler () {
 						console.log(json.options);
 						if (logged) {
 							var voted = false;
-							if (Users.count({ 'github.id': req.user.github.id, voted: req.params.id}, 
-							function (err, count) {
-								return true;
-							})) {
-								json.voted = true;
-							}
-
 							Users.count({ 'github.id': req.user.github.id }, function (err, count) {
 								json.ownership = true;
 								console.log("test");
-								res.json(json);
+								Users.count({ 'github.id': req.user.github.id, voted: req.params.id},
+		                                                        function (err, count) {
+                	                                                if (err) throw err;
+									console.log("***");
+                        	                               		if (count > 0) {
+										console.log("pika voted");
+								                json.voted = true;
+									}
+									res.json(json);
+                                                       		});
 							});
 						}
 						else {
