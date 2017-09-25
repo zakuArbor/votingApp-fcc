@@ -25,7 +25,9 @@
 		for (i = 0; i < userObject.options.length; i++) {
 			html += "<option value='" + userObject.options[i].option +"'>" + userObject.options[i].option + "</option>";
 		}
-		html += "<option id = 'new_option' value = 'new'>Add custom option</option>";
+		if (loggedIn) { 
+			html += "<option id = 'new_option' value = 'new'>Add custom option</option>";
+		}
 		console.log("------------------------------------");
 		console.log(userObject);	
 		updateHtmlElement(options_panel, html);

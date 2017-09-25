@@ -53,6 +53,9 @@ function PollHandler () {
 		var path = "/" + req.body.poll_id;
 		var query, update;
 		if (req.body.option == "new" && req.body.custom_option !== "") {
+			if (!logged) {
+				res.redirect(path);
+			}
 			query = {"_id": req.body.poll_id};
 			update = {$push: {"options": {option: req.body.custom_option, votes: 1}}};
 		}
@@ -60,6 +63,7 @@ function PollHandler () {
 			query = {"_id": req.body.poll_id, "options.option": req.body.option};
 			update = {$inc: { "options.$.votes": 1}};
 		}
+		
 		Polls
 			.update(
 				query,
